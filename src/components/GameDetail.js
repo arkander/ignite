@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {motion} from 'framer-motion';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom';
 import {smallImage} from '../utils';
 
@@ -18,7 +18,9 @@ import starFull from "../img/star-full.png";
 
 const GameDetail = ({pathId})=>{
 
+    const dispatch = useDispatch();
     const {screen, game, isLoading} = useSelector((state)=>state.detail);
+    console.log( isLoading);
 
     const history = useHistory();
 
@@ -27,6 +29,7 @@ const GameDetail = ({pathId})=>{
       if(element.classList.contains('shadow')){
         document.body.style.overflow = 'auto';
         history.push('/');
+        dispatch({type:'LOADED_DETAIL'});
       }
     }
 
