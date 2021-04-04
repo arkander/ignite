@@ -5,21 +5,25 @@ import {motion} from 'framer-motion';
 import {useDispatch} from 'react-redux';
 import {loadDetail} from '../actions/detailsAction';
 import {Link} from 'react-router-dom';
+import {smallImage} from '../utils';
 
-
-const Game = ({name, released, id, image})=>{
+const Game = ({name, released,  image, id})=>{
+   
+    const stringPathId  = id.toString();   
 
     const dispatch = useDispatch();
-    const loadDetailHandler = ()=>{       
+    
+    const loadDetailHandler = ()=>{     
+        document.body.style.overflow = 'hidden';//adicionado para evitar o scroll do fundo quando o componente de detalhes for exibido
         dispatch(loadDetail(id));
     };
 
     return (
-        <StyledGame onClick={loadDetailHandler}>
+        <StyledGame onClick={loadDetailHandler} layoutId={stringPathId}>
             <Link to={`/game/${id}`}>
-                <h3>{name}</h3>
+                <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
                 <p>{released}</p>
-                <img src={image} alt={name}/>   
+                <motion.img layoutId={`image ${stringPathId}`} src={smallImage(image, 640)} alt={name}/>   
             </Link>
         </StyledGame>
     );
@@ -35,7 +39,7 @@ const StyledGame = styled(motion.div)`
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     cursor: pointer;
-
+    overflow:hidden;
     img{
         width:100%;
         height:40vh;
