@@ -71,6 +71,4 @@ const Games = styled(motion.div)`
 
 `;
 
-
-
 export default Home;

@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 import gameReducer from './gamesReducer';
 import games from './gamesReducer';
+import detailReducer from './detailReducer'
 
 const rootReducer  = combineReducers({
-    games:gameReducer
+    games:gameReducer,
+    detail:detailReducer
 });
 
 
